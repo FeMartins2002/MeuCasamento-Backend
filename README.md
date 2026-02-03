@@ -14,3 +14,19 @@ A documentação do projeto está disponível nos botões abaixo.
 [![Modelo Entidade-Relacionamento](https://img.shields.io/badge/Modelo_Entidade_Relacionamento-1abc9c?style=for-the-badge)](https://www.figma.com/board/9moMLsZn8QuCQCvkCRL9xC/MeuCasamento---MER?t=zoAHPuaoU13B2MOf-6)
 
 </div>
+
+---
+
+### Estrutura de Pacotes
+
+| Pacote | Responsabilidade                                                     |
+| :--- |:---------------------------------------------------------------------|
+| **`Configurations`** | Configurações da aplicação.                                          |
+| **`DTOs`** | Usados para comunicação entre camadas e API externa.                 |
+| **`Entities`** | Representação das tabelas no banco de dados.                         |
+| **`Enums`** | Enumerações com valores fixos da aplicação.                          |
+| **`Mappers`** | Responsável por converter `Entity` para `DTO` e `DTO` para `Entity`. |
+| **`Repositories`** | Interage com o banco de dados.                                       |
+| **`Resources`** | Recebe requisições HTTP e retorna respostas.                         |
+| **`Services`** | Contém a lógica de negócio.                                          |
+| **`Validators`** | Classes com métodos de validação personalizados                      |
