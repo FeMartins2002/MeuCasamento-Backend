@@ -1,12 +1,6 @@
 package br.com.MeuCasamento.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +12,7 @@ public class GiftList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 
     @OneToOne(optional = false)
@@ -33,6 +28,10 @@ public class GiftList implements Serializable {
 
     public GiftList(Party party) {
         this.party = party;
+    }
+
+    public List<Gift> getGifts() {
+        return gifts;
     }
 
     public void addGift(Gift gift) {
