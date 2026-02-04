@@ -42,7 +42,7 @@ public class Professional implements Serializable {
     private Manager manager;
 
     @OneToMany(mappedBy = "professional")
-    private List<ProfessionalAllocation> professionalAllocations = new ArrayList<>();
+    private List<Allocation> allocations = new ArrayList<>();
 
     public Professional() {
 
@@ -105,7 +105,7 @@ public class Professional implements Serializable {
         return manager;
     }
 
-    public List<ProfessionalAllocation> getProfessionalAllocations() {
-        return professionalAllocations;
+    public List<Allocation> getProfessionalAllocations() {
+        return allocations;
     }
 }
