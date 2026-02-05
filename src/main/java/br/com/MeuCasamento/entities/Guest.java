@@ -16,23 +16,23 @@ public class Guest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "E-mail")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Address")
+    @Column(name = "address")
     private String address;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Guest_List_Id", nullable = false)
+    @JoinColumn(name = "guest_list_id", nullable = false)
     private GuestList guestList;
 
     public Guest() {

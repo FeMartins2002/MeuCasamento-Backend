@@ -16,20 +16,20 @@ public class ServiceConfig implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Quantity")
+    @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "Agreed_Value")
+    @Column(name = "agreed_value")
     private double agreedValue;
 
-    @Column(name = "Notes")
+    @Column(name = "notes")
     private String notes;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Service_ID", nullable = false)
+    @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 
     @ManyToOne(optional = false)

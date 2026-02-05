@@ -18,28 +18,28 @@ public class Manager implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "E-mail")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "CPF")
+    @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "Address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "Role")
+    @Column(name = "role")
     private Role role;
 
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
 
     @OneToMany(mappedBy = "manager")

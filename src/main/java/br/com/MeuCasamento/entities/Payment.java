@@ -16,20 +16,20 @@ public class Payment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Method")
+    @Column(name = "method")
     private String method;
 
-    @Column(name = "Status")
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "Payment_Value")
+    @Column(name = "payment_value")
     private double paymentValue;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "Budget_ID", nullable = false, unique = true)
+    @JoinColumn(name = "budget_id", nullable = false, unique = true)
     private Budget budget;
 
     public Payment() {

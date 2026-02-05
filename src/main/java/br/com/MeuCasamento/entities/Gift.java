@@ -16,20 +16,20 @@ public class Gift implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Store")
+    @Column(name = "store")
     private String store;
 
-    @Column(name = "Price")
+    @Column(name = "price")
     private double price;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Gift_List_Id", nullable = false)
+    @JoinColumn(name = "gift_list_id", nullable = false)
     private GiftList giftList;
 
     public Gift() {

@@ -12,11 +12,11 @@ public class GuestList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "Party_ID", nullable = false, unique = true)
+    @JoinColumn(name = "party_id", nullable = false, unique = true)
     private Party party;
 
     @OneToMany(mappedBy = "guestList")

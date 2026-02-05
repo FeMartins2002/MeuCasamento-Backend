@@ -17,17 +17,17 @@ public class Budget implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Generation_Date")
+    @Column(name = "generation_date")
     private Date generationDate;
 
-    @Column(name = "Total_Value")
+    @Column(name = "total_value")
     private double totalValue;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "Party_ID", nullable = false, unique = true)
+    @JoinColumn(name = "party_id", nullable = false, unique = true)
     private Party party;
 
     @OneToOne(mappedBy = "budget")

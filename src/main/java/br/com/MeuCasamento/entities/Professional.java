@@ -19,26 +19,26 @@ public class Professional implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "Speciality")
+    @Column(name = "speciality")
     private String speciality;
 
-    @Column(name = "Availability")
+    @Column(name = "availability")
     private String availability;
 
-    @Column(name = "Hourly_Rate")
+    @Column(name = "hourly_rate")
     private double hourlyRate;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Manager_ID", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
 
     @OneToMany(mappedBy = "professional")

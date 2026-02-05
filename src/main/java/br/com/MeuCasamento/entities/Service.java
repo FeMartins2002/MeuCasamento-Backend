@@ -19,20 +19,20 @@ public class Service implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Type")
+    @Column(name = "service_type")
     private String type;
 
-    @Column(name = "Service_Value")
+    @Column(name = "service_value")
     private double serviceValue;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Manager_ID", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
 
     @OneToMany(mappedBy = "service")

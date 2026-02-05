@@ -19,20 +19,20 @@ public class PartyHall implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "Available")
+    @Column(name = "available")
     private String available;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Manager_ID", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
 
     @OneToMany(mappedBy = "partyHall")

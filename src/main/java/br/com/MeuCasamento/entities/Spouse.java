@@ -17,32 +17,32 @@ public class Spouse implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "CPF")
+    @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "E-mail")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "Address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Party_ID", nullable = false)
+    @JoinColumn(name = "party_id", nullable = false)
     private Party party;
 
-    @Column(name = "Role")
+    @Column(name = "role")
     private Role role;
 
     public Spouse() {

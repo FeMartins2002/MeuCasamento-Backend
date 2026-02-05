@@ -25,13 +25,13 @@ public class Party implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Date")
+    @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "External_ID", nullable = false, unique = true, updatable = false)
+    @Column(name = "external_id", nullable = false, unique = true, updatable = false)
     private UUID externalId;
 
     @OneToMany(mappedBy = "party")
@@ -44,7 +44,7 @@ public class Party implements Serializable {
     private GuestList guestList;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Manager_ID", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
 
     @OneToOne(mappedBy = "party")

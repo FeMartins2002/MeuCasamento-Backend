@@ -19,18 +19,18 @@ public class PartyConfig implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Status")
+    @Column(name = "status")
     private String status;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "Party_Id", nullable = false, unique = true)
+    @JoinColumn(name = "party_id", nullable = false, unique = true)
     private Party party;
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "Party_Hall_ID")
+    @JoinColumn(name = "party_hall_id")
     private PartyHall partyHall;
 
     @OneToMany(mappedBy = "partyConfig")

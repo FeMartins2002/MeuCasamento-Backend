@@ -18,28 +18,28 @@ public class Allocation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "Date")
+    @Column(name = "allocation_date")
     private LocalDate date;
 
-    @Column(name = "Time")
+    @Column(name = "allocation_time")
     private LocalDateTime time;
 
-    @Column(name = "Allocation_Value")
+    @Column(name = "allocation_value")
     private double allocationValue;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Party_Config_ID", nullable = false)
+    @JoinColumn(name = "party_config_id", nullable = false)
     private PartyConfig partyConfig;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Service_ID", nullable = false)
+    @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "Professional_ID", nullable = false)
+    @JoinColumn(name = "professional_id", nullable = false)
     private Professional professional;
 
     public Allocation() {
