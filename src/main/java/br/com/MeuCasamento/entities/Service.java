@@ -84,11 +84,23 @@ public class Service implements Serializable {
         return manager;
     }
 
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
     public List<Allocation> getAllocations() {
         return allocations;
     }
 
+    public void setAllocations(List<Allocation> allocations) {
+        this.allocations = allocations;
+    }
+
     public List<ServiceConfig> getServiceConfig() {
         return serviceConfig;
+    }
+
+    public void setServiceConfig(List<ServiceConfig> serviceConfig) {
+        this.serviceConfig = serviceConfig;
     }
 }

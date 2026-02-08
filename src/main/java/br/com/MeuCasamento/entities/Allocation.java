@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,11 +20,8 @@ public class Allocation implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "allocation_date")
-    private LocalDate date;
-
-    @Column(name = "allocation_time")
-    private LocalDateTime time;
+    @Column(name = "allocation_date_time")
+    private LocalDateTime allocationDateTime;
 
     @Column(name = "allocation_value")
     private double allocationValue;
@@ -46,9 +42,8 @@ public class Allocation implements Serializable {
 
     }
 
-    public Allocation(LocalDate date, LocalDateTime time, double allocationValue, PartyConfig partyConfig, Service service, Professional professional) {
-        this.date = date;
-        this.time = time;
+    public Allocation(LocalDateTime allocationDateTime, double allocationValue, PartyConfig partyConfig, Service service, Professional professional) {
+        this.allocationDateTime = allocationDateTime;
         this.allocationValue = allocationValue;
         this.partyConfig = partyConfig;
         this.service = service;
@@ -59,20 +54,12 @@ public class Allocation implements Serializable {
         return id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getAllocationDateTime() {
+        return allocationDateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setAllocationDateTime(LocalDateTime allocationDateTime) {
+        this.allocationDateTime = allocationDateTime;
     }
 
     public double getAllocationValue() {

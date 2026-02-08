@@ -105,7 +105,15 @@ public class Professional implements Serializable {
         return manager;
     }
 
-    public List<Allocation> getProfessionalAllocations() {
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public List<Allocation> getAllocations() {
         return allocations;
+    }
+
+    public void setAllocations(List<Allocation> allocations) {
+        this.allocations = allocations;
     }
 }
