@@ -103,6 +103,10 @@ public class Party implements Serializable {
         return manager;
     }
 
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
     public Budget getBudget() {
         return budget;
     }
