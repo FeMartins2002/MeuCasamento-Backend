@@ -3,6 +3,8 @@ package br.com.MeuCasamento.repositories;
 import br.com.MeuCasamento.entities.Manager;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ManagerRepository extends JpaRepository<Manager, Long> {
+import java.util.Optional;
 
+public interface ManagerRepository extends JpaRepository<Manager, Long> {
+    Optional<Manager> findByEmail(String email);
 }
