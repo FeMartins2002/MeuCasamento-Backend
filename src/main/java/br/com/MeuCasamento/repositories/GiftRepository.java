@@ -4,5 +4,5 @@ import br.com.MeuCasamento.entities.Gift;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GiftRepository extends JpaRepository<Gift, Long> {
-
+    Gift findByName(String name);
 }
