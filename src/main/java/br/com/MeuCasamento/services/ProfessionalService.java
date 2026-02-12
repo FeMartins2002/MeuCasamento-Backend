@@ -17,6 +17,11 @@ public class ProfessionalService {
         if(existingProfessional != null) {
             throw new RuntimeException("Professional já cadastrado.");
         }
+
+        if(newProfessional.getManager() == null) {
+            throw new RuntimeException("Gerente não pode ser nulo");
+        }
+
         newProfessional.setAvailability(availability);
         return professionalRepository.save(newProfessional);
     }
