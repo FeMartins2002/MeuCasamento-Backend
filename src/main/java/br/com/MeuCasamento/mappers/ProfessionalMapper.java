@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface ProfessionalMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "cpf", source = "dto.cpf")
     @Mapping(target = "name", source = "dto.name")
     @Mapping(target = "phone", source = "dto.phone")
     @Mapping(target = "speciality", source = "dto.speciality")

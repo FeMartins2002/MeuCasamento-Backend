@@ -4,5 +4,5 @@ import br.com.MeuCasamento.entities.Professional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfessionalRepository extends JpaRepository<Professional, Long> {
-
+    Professional findByCpf(String cpf);
 }

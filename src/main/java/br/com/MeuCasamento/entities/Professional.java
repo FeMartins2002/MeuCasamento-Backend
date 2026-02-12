@@ -1,13 +1,7 @@
 package br.com.MeuCasamento.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import br.com.MeuCasamento.enums.Availability;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +16,9 @@ public class Professional implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "cpf", nullable = false, unique = true)
+    private String cpf;
+
     @Column(name = "name")
     private String name;
 
@@ -31,8 +28,9 @@ public class Professional implements Serializable {
     @Column(name = "speciality")
     private String speciality;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "availability")
-    private String availability;
+    private Availability availability;
 
     @Column(name = "hourly_rate")
     private double hourlyRate;
@@ -48,8 +46,9 @@ public class Professional implements Serializable {
 
     }
 
-    public Professional(String name, String phone, String speciality, String availability, double hourlyRate, Manager manager) {
+    public Professional(String name, String cpf, String phone, String speciality, Availability availability, double hourlyRate, Manager manager) {
         this.name = name;
+        this.cpf = cpf;
         this.phone = phone;
         this.speciality = speciality;
         this.availability = availability;
@@ -69,6 +68,14 @@ public class Professional implements Serializable {
         this.name = name;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -85,11 +92,11 @@ public class Professional implements Serializable {
         this.speciality = speciality;
     }
 
-    public String getAvailability() {
+    public Availability getAvailability() {
         return availability;
     }
 
-    public void setAvailability(String availability) {
+    public void setAvailability(Availability availability) {
         this.availability = availability;
     }
 
