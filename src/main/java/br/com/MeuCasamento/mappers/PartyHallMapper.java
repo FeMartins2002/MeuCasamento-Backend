@@ -11,7 +11,7 @@ public interface PartyHallMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "dto.name")
     @Mapping(target = "address", source = "dto.address")
-    @Mapping(target = "available", source = "dto.available")
+    @Mapping(target = "availability", source = "dto.availability")
     @Mapping(target = "manager", source = "manager")
     PartyHall toEntity(CreatePartyHallDTO dto, Manager manager);
 }

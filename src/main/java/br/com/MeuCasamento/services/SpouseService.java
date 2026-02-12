@@ -27,7 +27,7 @@ public class SpouseService {
             throw new RuntimeException("Cônjuge já cadastrado.");
         }
 
-        Party party = partyRepository.findById(externalPartyId)
+        Party party = partyRepository.findByExternalId(externalPartyId)
                 .orElseThrow(() -> new RuntimeException("Festa não encontrada."));
 
         if (party.getSpouses().size() >= 2) {

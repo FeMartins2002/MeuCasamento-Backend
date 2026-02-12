@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PartyRepository extends JpaRepository<Party, Long> {
-    Optional<Party> findById(UUID externalPartyId);
+    Optional<Party> findByExternalId(UUID externalPartyId);
 }

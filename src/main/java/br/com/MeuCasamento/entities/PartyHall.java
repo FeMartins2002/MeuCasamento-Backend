@@ -1,13 +1,7 @@
 package br.com.MeuCasamento.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import br.com.MeuCasamento.enums.Availability;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,8 +22,9 @@ public class PartyHall implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "available")
-    private String available;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "availability")
+    private Availability availability;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "manager_id", nullable = false)
@@ -42,10 +37,10 @@ public class PartyHall implements Serializable {
 
     }
 
-    public PartyHall(String name, String address, String available, Manager manager) {
+    public PartyHall(String name, String address, Availability availability, Manager manager) {
         this.name = name;
         this.address = address;
-        this.available = available;
+        this.availability = availability;
         this.manager = manager;
     }
 
@@ -69,12 +64,12 @@ public class PartyHall implements Serializable {
         this.address = address;
     }
 
-    public String getAvailable() {
-        return available;
+    public Availability getAvailability() {
+        return availability;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
     }
 
     public Manager getManager() {

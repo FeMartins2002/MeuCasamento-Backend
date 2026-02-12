@@ -1,5 +1,6 @@
 package br.com.MeuCasamento.dtos.request.partyhall;
 
+import br.com.MeuCasamento.enums.Availability;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -13,7 +14,7 @@ public class CreatePartyHallDTO {
     private String address;
 
     @NotBlank
-    private String available;
+    private Availability availability;
 
     public CreatePartyHallDTO() {
 
@@ -35,11 +36,11 @@ public class CreatePartyHallDTO {
         this.address = address;
     }
 
-    public String getAvailable() {
-        return available;
+    public Availability getAvailability() {
+        return availability;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
     }
 }
