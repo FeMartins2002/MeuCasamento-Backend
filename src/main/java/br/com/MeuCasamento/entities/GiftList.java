@@ -30,6 +30,18 @@ public class GiftList implements Serializable {
         this.party = party;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Party getParty() {
+        return party;
+    }
+
+    public void setParty(Party party) {
+        this.party = party;
+    }
+
     public List<Gift> getGifts() {
         return gifts;
     }
