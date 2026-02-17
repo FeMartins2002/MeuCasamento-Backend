@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.mappers;
 
 import br.com.MeuCasamento.dtos.request.spouse.CreateSpouseDTO;
+import br.com.MeuCasamento.dtos.response.SpouseResponseDTO;
 import br.com.MeuCasamento.entities.Party;
 import br.com.MeuCasamento.entities.Spouse;
 import org.mapstruct.Mapper;
@@ -12,4 +13,6 @@ public interface SpouseMapper {
     @Mapping(target = "party", source = "party")
     @Mapping(target = "password", source = "defaultPassword")
     Spouse toEntity(CreateSpouseDTO dto, Party party, String defaultPassword);
+
+    SpouseResponseDTO toResponse(Spouse spouse);
 }
