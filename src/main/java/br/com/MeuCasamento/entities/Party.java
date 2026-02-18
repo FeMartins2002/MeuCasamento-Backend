@@ -1,5 +1,6 @@
 package br.com.MeuCasamento.entities;
 
+import br.com.MeuCasamento.exceptions.SpouseLimitExceededException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -122,25 +121,22 @@ public class Party implements Serializable {
 
     public void addSpouse(Spouse spouse) {
         if (spouses.size() >= 2) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A festa ja possui dois cônjuges."
-            );
+            throw new SpouseLimitExceededException("The party already has two spouses.");
         }
-        else {
             spouses.add(spouse);
             spouse.setParty(this);
-        }
     }
 
     public void createGiftList() {
         if (this.giftList != null) {
-            throw new IllegalStateException("A festa já possui uma lista de presentes.");
+            throw new IllegalStateException("The party already has a gift registry.");
         }
         this.giftList = new GiftList(this);
     }
 
     public void createGuestList() {
         if (this.guestList != null) {
-            throw new IllegalStateException("A festa já possui lista de convidados.");
+            throw new IllegalStateException("The party already has a guest list.");
         }
         this.guestList = new GuestList(this);
     }
