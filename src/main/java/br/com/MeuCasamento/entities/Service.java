@@ -22,13 +22,13 @@ public class Service implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "service_type")
+    @Column(name = "service_type", nullable = false)
     private String type;
 
-    @Column(name = "service_value")
+    @Column(name = "service_value", nullable = false)
     private double serviceValue;
 
     @ManyToOne(optional = false)

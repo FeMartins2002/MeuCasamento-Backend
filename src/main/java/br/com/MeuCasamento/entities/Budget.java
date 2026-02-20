@@ -20,10 +20,10 @@ public class Budget implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "generation_date")
+    @Column(name = "generation_date", nullable = false)
     private Date generationDate;
 
-    @Column(name = "total_value")
+    @Column(name = "total_value", nullable = false)
     private double totalValue;
 
     @OneToOne(optional = false)

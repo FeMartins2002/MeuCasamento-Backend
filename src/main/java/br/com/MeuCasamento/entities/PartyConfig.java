@@ -22,7 +22,7 @@ public class PartyConfig implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
 
     @OneToOne(optional = false)

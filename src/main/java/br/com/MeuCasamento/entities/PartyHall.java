@@ -16,14 +16,14 @@ public class PartyHall implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "availability")
+    @Column(name = "availability", nullable = false)
     private Availability availability;
 
     @ManyToOne(optional = false)

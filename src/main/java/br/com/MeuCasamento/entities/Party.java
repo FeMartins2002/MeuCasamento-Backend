@@ -27,7 +27,7 @@ public class Party implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private LocalDate date;
 
     @Column(name = "external_id", nullable = false, unique = true, updatable = false)

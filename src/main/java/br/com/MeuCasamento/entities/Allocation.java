@@ -20,10 +20,10 @@ public class Allocation implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "allocation_date_time")
+    @Column(name = "allocation_date_time", nullable = false)
     private LocalDateTime allocationDateTime;
 
-    @Column(name = "allocation_value")
+    @Column(name = "allocation_value", nullable = false)
     private double allocationValue;
 
     @ManyToOne(optional = false)

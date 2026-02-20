@@ -19,13 +19,13 @@ public class Payment implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "method")
+    @Column(name = "method", nullable = false)
     private String method;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "payment_value")
+    @Column(name = "payment_value", nullable = false)
     private double paymentValue;
 
     @OneToOne(optional = false)

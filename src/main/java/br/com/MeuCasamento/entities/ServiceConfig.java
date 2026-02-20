@@ -19,10 +19,10 @@ public class ServiceConfig implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "agreed_value")
+    @Column(name = "agreed_value", nullable = false)
     private double agreedValue;
 
     @Column(name = "notes")

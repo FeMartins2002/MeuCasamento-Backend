@@ -19,20 +19,20 @@ public class Professional implements Serializable {
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false, unique = true)
     private String phone;
 
-    @Column(name = "speciality")
+    @Column(name = "speciality", nullable = false)
     private String speciality;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "availability")
+    @Column(name = "availability", nullable = false)
     private Availability availability;
 
-    @Column(name = "hourly_rate")
+    @Column(name = "hourly_rate", nullable = false)
     private double hourlyRate;
 
     @ManyToOne(optional = false)

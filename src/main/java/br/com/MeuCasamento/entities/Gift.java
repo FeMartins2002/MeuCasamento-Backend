@@ -19,13 +19,13 @@ public class Gift implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "store")
+    @Column(name = "store", nullable = false)
     private String store;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private double price;
 
     @ManyToOne(optional = false)
