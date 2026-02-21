@@ -107,6 +107,10 @@ public class Manager implements Serializable {
         return role;
     }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public String getPassword() {
         return password;
     }
