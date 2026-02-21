@@ -118,4 +118,12 @@ public class Spouse implements Serializable {
     public void setParty(Party party) {
         this.party = party;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Budget implements Serializable {
@@ -21,7 +21,7 @@ public class Budget implements Serializable {
     private Long id;
 
     @Column(name = "generation_date", nullable = false)
-    private Date generationDate;
+    private LocalDate generationDate;
 
     @Column(name = "total_value", nullable = false)
     private double totalValue;
@@ -37,7 +37,7 @@ public class Budget implements Serializable {
 
     }
 
-    public Budget(Date generationDate, double totalValue, Party party, Payment payment) {
+    public Budget(LocalDate generationDate, double totalValue, Party party, Payment payment) {
         this.generationDate = generationDate;
         this.totalValue = totalValue;
         this.party = party;
@@ -48,11 +48,11 @@ public class Budget implements Serializable {
         return id;
     }
 
-    public Date getGenerationDate() {
+    public LocalDate getGenerationDate() {
         return generationDate;
     }
 
-    public void setGenerationDate(Date generationDate) {
+    public void setGenerationDate(LocalDate generationDate) {
         this.generationDate = generationDate;
     }
 
