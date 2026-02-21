@@ -1,9 +1,8 @@
 package br.com.MeuCasamento.dtos.request.guest;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+import java.util.UUID;
 
 public class CreateGuestDTO {
 
@@ -22,6 +21,9 @@ public class CreateGuestDTO {
     @NotBlank
     @Size(min = 10)
     private String address;
+
+    @NotNull
+    private UUID externalPartyId;
 
     public CreateGuestDTO() {
 
@@ -57,5 +59,13 @@ public class CreateGuestDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public UUID getExternalPartyId() {
+        return externalPartyId;
+    }
+
+    public void setExternalPartyId(UUID externalPartyId) {
+        this.externalPartyId = externalPartyId;
     }
 }
