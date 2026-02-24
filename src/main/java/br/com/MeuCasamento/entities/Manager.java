@@ -103,6 +103,14 @@ public class Manager implements Serializable {
         this.cpf = cpf;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Role getRole() {
         return role;
     }

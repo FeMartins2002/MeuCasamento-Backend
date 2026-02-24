@@ -1,7 +1,12 @@
 package br.com.MeuCasamento.services;
 
+import br.com.MeuCasamento.dtos.request.manager.CreateManagerDTO;
+import br.com.MeuCasamento.dtos.response.manager.ManagerResponseDTO;
 import br.com.MeuCasamento.entities.Manager;
+import br.com.MeuCasamento.enums.Role;
+import br.com.MeuCasamento.mappers.ManagerMapper;
 import br.com.MeuCasamento.repositories.ManagerRepository;
+import br.com.MeuCasamento.services.utils.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,39 +19,73 @@ public class ManagerService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Manager findById(Long id) {
-        return managerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Manager não encontrado"));
-    }
+    @Autowired
+    private ManagerMapper managerMapper;
 
-    public Manager save(Manager manager) {
-        if (manager.getPassword() != null && !manager.getPassword().isEmpty()) {
-            String encryptedPassword = passwordEncoder.encode(manager.getPassword());
-            manager.setPassword(encryptedPassword);
-        }
-        return managerRepository.save(manager);
-    }
+    public ManagerResponseDTO save(CreateManagerDTO newManager) {
+        validateManager(newManager);
+        Manager manager = createManager(newManager);
+        manager.setRole(Role.ROLE_MANAGER);
 
-    public Manager login(String email, String password) {
-        Manager manager = managerRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("E-mail ou senha inválidos"));
-
-        if (!passwordEncoder.matches(password, manager.getPassword())) {
-            throw new RuntimeException("E-mail ou senha inválidos");
-        }
-        return manager;
+        return managerMapper.toResponse(managerRepository.save(manager));
     }
 
     public Manager changePassword(Long managerId, String newPassword) {
         Manager manager = findById(managerId);
 
-        if (newPassword == null || newPassword.isEmpty()) {
+        if(!validateNewPassword(newPassword)) {
             throw new RuntimeException("Nova senha inválida");
         }
 
-        String encryptedPassword = passwordEncoder.encode(newPassword);
-        manager.setPassword(encryptedPassword);
+        manager.setPassword(passwordEncoder.encode(newPassword));
 
         return managerRepository.save(manager);
+    }
+
+    private void validateManager(CreateManagerDTO manager) {
+        if (managerRepository.findByEmail(manager.getEmail()).isPresent()) {
+            throw new RuntimeException("Email já cadastrado");
+        }
+
+        if (managerRepository.findByPhone(manager.getPhone()).isPresent()) {
+            throw new RuntimeException("Telefone já cadastrado");
+        }
+
+        if (managerRepository.findByCpf(manager.getCpf()).isPresent()) {
+            throw new RuntimeException("CPF já cadastrado");
+        }
+    }
+
+    private boolean validateNewPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    private Manager findById(Long id) {
+        return managerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Gerente não encontrado"));
+    }
+
+    private boolean findEmail(String email) {
+        return managerRepository.findByEmail(email).isPresent();
+    }
+
+    private boolean findPhone(String phone) {
+        return managerRepository.findByPhone(phone).isPresent();
+    }
+
+    private boolean findCpf(String cpf) {
+        return managerRepository.findByCpf(cpf).isPresent();
+    }
+
+    private Manager createManager(CreateManagerDTO newManager) {
+        return managerMapper.toManager(
+                newManager,
+                passwordEncoder.encode(PasswordGenerator.generateDefaultPassword())
+        );
     }
 }

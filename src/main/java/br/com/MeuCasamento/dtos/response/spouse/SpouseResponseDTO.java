@@ -1,4 +1,4 @@
-package br.com.MeuCasamento.dtos.response;
+package br.com.MeuCasamento.dtos.response.spouse;
 
 public class SpouseResponseDTO {
     private Long id;
