@@ -2,8 +2,11 @@ package br.com.MeuCasamento.services.utils;
 
 import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.entities.Party;
+import br.com.MeuCasamento.entities.Spouse;
+import br.com.MeuCasamento.enums.Role;
 import br.com.MeuCasamento.repositories.ManagerRepository;
 import br.com.MeuCasamento.repositories.PartyRepository;
+import br.com.MeuCasamento.repositories.SpouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +25,9 @@ public class InitializeDB implements CommandLineRunner {
     private PartyRepository partyRepository;
 
     @Autowired
+    private SpouseRepository spouseRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -34,7 +40,7 @@ public class InitializeDB implements CommandLineRunner {
                 "Rua Diamante da Rocha, 123",
                 passwordEncoder.encode("123")
         );
-
+        manager.setRole(Role.ROLE_MANAGER);
         managerRepository.save(manager);
 
         Party party1 = new Party(LocalDate.of(2026, 10, 16), manager);
@@ -43,5 +49,33 @@ public class InitializeDB implements CommandLineRunner {
 
         List<Party> parties = Arrays.asList(party1, party2, party3);
         partyRepository.saveAll(parties);
+
+        Spouse spouse1 = new Spouse(
+                "10000000001",
+                "Maria",
+                "maria123@gmail.com",
+                "11999999991",
+                "Rua Alves, 123",
+                passwordEncoder.encode("12345"),
+                party1
+        );
+        spouse1.setRole(Role.ROLE_SPOUSE);
+        party1.addSpouse(spouse1);
+
+        Spouse spouse2 = new Spouse(
+                "20000000002",
+                "Mario",
+                "mario123@gmail.com",
+                "11988888888",
+                "Rua Menta, 123",
+                passwordEncoder.encode("54321"),
+                party1
+        );
+        spouse2.setRole(Role.ROLE_SPOUSE);
+        party1.addSpouse(spouse2);
+
+        List<Spouse> spouses = Arrays.asList(spouse1, spouse2);
+        spouseRepository.saveAll(spouses);
+        partyRepository.save(party1);
     }
 }

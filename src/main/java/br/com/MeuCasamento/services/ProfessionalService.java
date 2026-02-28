@@ -1,7 +1,11 @@
 package br.com.MeuCasamento.services;
 
-import br.com.MeuCasamento.entities.Professional;
-import br.com.MeuCasamento.enums.Availability;
+import br.com.MeuCasamento.dtos.request.professional.CreateProfessionalDTO;
+import br.com.MeuCasamento.dtos.response.professional.ProfessionalResponseDTO;
+import br.com.MeuCasamento.entities.Manager;
+import br.com.MeuCasamento.exceptions.CpfAlreadyRegisteredException;
+import br.com.MeuCasamento.mappers.ProfessionalMapper;
+import br.com.MeuCasamento.repositories.ManagerRepository;
 import br.com.MeuCasamento.repositories.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,29 +13,42 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfessionalService {
     @Autowired
-    ProfessionalRepository professionalRepository;
+    private ProfessionalRepository professionalRepository;
 
-    public Professional save(Professional newProfessional, Availability availability) {
-        Professional existingProfessional = professionalRepository.findByCpf(newProfessional.getCpf());
+    @Autowired
+    private ManagerRepository managerRepository;
 
-        if(existingProfessional != null) {
-            throw new RuntimeException("Professional já cadastrado.");
+    @Autowired
+    private ProfessionalMapper professionalMapper;
+
+    public ProfessionalResponseDTO save(CreateProfessionalDTO newProfessional) {
+        // Id do Manager logado - futura implementação...
+        long id = 1;
+
+        if(findManager(id) == null) {
+            throw new RuntimeException("Gerente não encontrado");
         }
+        Manager manager = findManager(id);
 
-        if(newProfessional.getManager() == null) {
-            throw new RuntimeException("Gerente não pode ser nulo");
-        }
+        validateCpf(newProfessional.getCpf());
+        validatePhone(newProfessional.getPhone());
 
-        newProfessional.setAvailability(availability);
-        return professionalRepository.save(newProfessional);
+        return professionalMapper.toResponse(professionalRepository.save(professionalMapper.toEntity(newProfessional, manager)));
     }
 
-   public Professional updateAvailability(Long id, Availability availability) {
-        Professional professional = professionalRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
+    private void validateCpf(String cpf) {
+        if (professionalRepository.findByCpf(cpf) != null) {
+            throw new CpfAlreadyRegisteredException(cpf);
+        }
+    }
 
-        professional.setAvailability(availability);
+    private void validatePhone(String phone) {
+        if (professionalRepository.findByPhone(phone)) {
+            throw new RuntimeException("Professional já cadastrado");
+        }
+    }
 
-        return professionalRepository.save(professional);
+    private Manager findManager(Long id) {
+        return managerRepository.findById(id).orElse(null);
     }
 }

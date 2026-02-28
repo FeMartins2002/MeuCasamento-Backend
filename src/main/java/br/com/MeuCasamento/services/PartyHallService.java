@@ -1,7 +1,11 @@
 package br.com.MeuCasamento.services;
 
+import br.com.MeuCasamento.dtos.request.partyhall.CreatePartyHallDTO;
+import br.com.MeuCasamento.dtos.response.partyhall.PartyHallResponseDTO;
+import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.entities.PartyHall;
-import br.com.MeuCasamento.enums.Availability;
+import br.com.MeuCasamento.mappers.PartyHallMapper;
+import br.com.MeuCasamento.repositories.ManagerRepository;
 import br.com.MeuCasamento.repositories.PartyHallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,28 +15,38 @@ public class PartyHallService {
     @Autowired
     private PartyHallRepository partyHallRepository;
 
-    public PartyHall save(PartyHall newPartyHall) {
-        if(newPartyHall.getManager() == null) {
-            throw new RuntimeException("Gerente do salão não pode ser nulo");
+    @Autowired
+    private PartyHallMapper partyHallMapper;
+
+    @Autowired
+    private ManagerRepository managerRepository;
+
+    public PartyHallResponseDTO save(CreatePartyHallDTO newPartyHall) {
+        // Id do Manager logado - futura implementação...
+        long id = 1;
+
+        if(findManager(id) == null) {
+            throw new RuntimeException("Gerente não encontrado");
         }
+        Manager manager = findManager(id);
 
-        partyHallRepository
-                .findByNameAndAddress(newPartyHall.getName(), newPartyHall.getAddress())
-                .ifPresent(existing -> {
-                    throw new RuntimeException("Já existe um salão com esse nome e endereço");
-                });
+        validatePartyHall(newPartyHall);
+        PartyHall partyhall = partyHallMapper.toEntity(newPartyHall, manager);
 
-        newPartyHall.getManager().getPartyHalls().add(newPartyHall);
+        manager.getPartyHalls().add(partyhall);
 
-        return partyHallRepository.save(newPartyHall);
+        return partyHallMapper.toResponse(partyHallRepository.save(partyhall));
     }
 
-    public PartyHall updateAvailability(Long id, Availability availability) {
-        PartyHall partyHall = partyHallRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Salão não encontrado"));
+    private void validatePartyHall(CreatePartyHallDTO partyHall) {
+        partyHallRepository
+                .findByNameAndAddress(partyHall.getName(), partyHall.getAddress())
+                .ifPresent(existing -> {
+                    throw new RuntimeException("Salão já cadastrado");
+                });
+    }
 
-        partyHall.setAvailability(availability);
-
-        return partyHallRepository.save(partyHall);
+    private Manager findManager(Long id) {
+        return managerRepository.findById(id).orElse(null);
     }
 }

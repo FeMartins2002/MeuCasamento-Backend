@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.mappers;
 
 import br.com.MeuCasamento.dtos.request.service.CreateServiceDTO;
+import br.com.MeuCasamento.dtos.response.service.ServiceResponseDTO;
 import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.entities.Service;
 import org.mapstruct.Mapper;
@@ -16,4 +17,6 @@ public interface ServiceMapper {
     @Mapping(target = "serviceConfig", ignore = true)
     @Mapping(target = "manager", source = "manager")
     Service toEntity(CreateServiceDTO dto, Manager manager);
+
+    ServiceResponseDTO toResponseDTO(Service service);
 }

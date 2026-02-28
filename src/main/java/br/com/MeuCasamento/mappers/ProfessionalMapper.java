@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.mappers;
 
 import br.com.MeuCasamento.dtos.request.professional.CreateProfessionalDTO;
+import br.com.MeuCasamento.dtos.response.professional.ProfessionalResponseDTO;
 import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.entities.Professional;
 import org.mapstruct.Mapper;
@@ -19,4 +20,6 @@ public interface ProfessionalMapper {
     @Mapping(target = "manager", source = "manager")
     @Mapping(target = "allocations", ignore = true)
     Professional toEntity(CreateProfessionalDTO dto, Manager manager);
+
+    ProfessionalResponseDTO toResponse(Professional professional);
 }

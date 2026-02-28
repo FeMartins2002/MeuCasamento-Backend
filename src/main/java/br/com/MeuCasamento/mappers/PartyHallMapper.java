@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.mappers;
 
 import br.com.MeuCasamento.dtos.request.partyhall.CreatePartyHallDTO;
+import br.com.MeuCasamento.dtos.response.partyhall.PartyHallResponseDTO;
 import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.entities.PartyHall;
 import org.mapstruct.Mapper;
@@ -14,4 +15,6 @@ public interface PartyHallMapper {
     @Mapping(target = "availability", source = "dto.availability")
     @Mapping(target = "manager", source = "manager")
     PartyHall toEntity(CreatePartyHallDTO dto, Manager manager);
+
+    PartyHallResponseDTO toResponse(PartyHall partyHall);
 }
