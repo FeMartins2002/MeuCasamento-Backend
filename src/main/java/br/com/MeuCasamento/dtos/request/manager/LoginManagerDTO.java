@@ -7,7 +7,7 @@ public class LoginManagerDTO {
     @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Senha não foi informada")
     private String password;
 
     public String getEmail() {

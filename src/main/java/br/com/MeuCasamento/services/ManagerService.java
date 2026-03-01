@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.services;
 
 import br.com.MeuCasamento.dtos.request.manager.CreateManagerDTO;
+import br.com.MeuCasamento.dtos.request.manager.LoginManagerDTO;
 import br.com.MeuCasamento.dtos.response.manager.ManagerResponseDTO;
 import br.com.MeuCasamento.entities.Manager;
 import br.com.MeuCasamento.enums.Role;
@@ -10,6 +11,8 @@ import br.com.MeuCasamento.services.utils.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ManagerService {
@@ -21,6 +24,17 @@ public class ManagerService {
 
     @Autowired
     private ManagerMapper managerMapper;
+
+    public boolean login(LoginManagerDTO loginManagerDTO) {
+        Optional<Manager> managerOptional = managerRepository.findByEmail(loginManagerDTO.getEmail());
+
+        if (managerOptional.isEmpty()) {
+            return false;
+        }
+
+        Manager manager = managerOptional.get();
+        return passwordEncoder.matches(loginManagerDTO.getPassword(), manager.getPassword());
+    }
 
     public ManagerResponseDTO save(CreateManagerDTO newManager) {
         validateManager(newManager);

@@ -44,8 +44,13 @@ public class InitializeDB implements CommandLineRunner {
         managerRepository.save(manager);
 
         Party party1 = new Party(LocalDate.of(2026, 10, 16), manager);
+        System.out.println("Party 1 External ID = " + party1.getExternalId());
+
         Party party2 = new Party(LocalDate.of(2026, 11, 27), manager);
+        System.out.println("Party 2 External ID = " + party2.getExternalId());
+
         Party party3 = new Party(LocalDate.of(2026, 12, 14), manager);
+        System.out.println("Party 3 External ID = " + party3.getExternalId());
 
         List<Party> parties = Arrays.asList(party1, party2, party3);
         partyRepository.saveAll(parties);
