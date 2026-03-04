@@ -1,6 +1,7 @@
 package br.com.MeuCasamento.services;
 
 import br.com.MeuCasamento.dtos.request.spouse.CreateSpouseDTO;
+import br.com.MeuCasamento.dtos.request.spouse.LoginSpouseDTO;
 import br.com.MeuCasamento.dtos.request.spouse.UpdatePasswordSpouseDTO;
 import br.com.MeuCasamento.dtos.request.spouse.UpdateSpouseDTO;
 import br.com.MeuCasamento.dtos.response.spouse.SpouseResponseDTO;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,6 +37,17 @@ public class SpouseService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public boolean login(LoginSpouseDTO loginSpouseDTO) {
+        Optional<Spouse> spouseOptional = spouseRepository.findByEmail(loginSpouseDTO.getEmail());
+
+        if(spouseOptional.isEmpty()) {
+            return false;
+        }
+
+        Spouse spouse = spouseOptional.get();
+        return passwordEncoder.matches(loginSpouseDTO.getPassword(), spouse.getPassword());
+    }
 
     public SpouseResponseDTO save(CreateSpouseDTO dto) {
         Party party = findParty(dto.getExternalPartyId());
