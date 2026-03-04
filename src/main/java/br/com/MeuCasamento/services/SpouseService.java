@@ -7,6 +7,7 @@ import br.com.MeuCasamento.dtos.request.spouse.UpdateSpouseDTO;
 import br.com.MeuCasamento.dtos.response.spouse.SpouseResponseDTO;
 import br.com.MeuCasamento.entities.Party;
 import br.com.MeuCasamento.entities.Spouse;
+import br.com.MeuCasamento.enums.Role;
 import br.com.MeuCasamento.exceptions.CpfAlreadyRegisteredException;
 import br.com.MeuCasamento.exceptions.InvalidPasswordException;
 import br.com.MeuCasamento.exceptions.PartyNotFoundException;
@@ -54,6 +55,7 @@ public class SpouseService {
         validateCpf(dto.getCpf());
 
         Spouse spouse = createSpouse(dto, party);
+        spouse.setRole(Role.ROLE_SPOUSE);
         party.addSpouse(spouse);
 
         return spouseMapper.toResponse(spouseRepository.save(spouse));
