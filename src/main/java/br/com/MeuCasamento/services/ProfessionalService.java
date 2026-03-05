@@ -43,7 +43,7 @@ public class ProfessionalService {
     }
 
     private void validatePhone(String phone) {
-        if (professionalRepository.findByPhone(phone)) {
+        if (professionalRepository.existsByPhone(phone)) {
             throw new RuntimeException("Professional já cadastrado");
         }
     }

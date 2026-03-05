@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProfessionalRepository extends JpaRepository<Professional, Long> {
     Professional findByCpf(String cpf);
 
-    boolean findByPhone(String phone);
+    boolean existsByPhone(String phone);
 }

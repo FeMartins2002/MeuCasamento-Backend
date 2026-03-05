@@ -2,6 +2,7 @@ package br.com.MeuCasamento.dtos.request.professional;
 
 import br.com.MeuCasamento.enums.Availability;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
@@ -21,7 +22,7 @@ public class CreateProfessionalDTO {
     @NotBlank
     private String speciality;
 
-    @NotBlank
+    @NotNull
     private Availability availability;
 
     @Positive

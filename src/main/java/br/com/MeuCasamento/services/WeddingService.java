@@ -30,7 +30,7 @@ public class WeddingService {
         Manager manager = findManager(id);
 
         if(validateService(service)) {
-            throw new RuntimeException("Service existente");
+            throw new RuntimeException("Serviço existente");
         }
 
         return serviceMapper.toResponseDTO(serviceRepository.save(serviceMapper.toEntity(service, manager)));
